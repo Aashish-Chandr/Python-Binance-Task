@@ -17,10 +17,6 @@ from bot.validators import validate_inputs
 logger = setup_logger("cli")
 
 
-# ---------------------------------------------------------------------------
-# Output helpers
-# ---------------------------------------------------------------------------
-
 def _print_summary(symbol: str, side: str, order_type: str, quantity: float, price: float | None) -> None:
     print("\n╔══════════════ ORDER REQUEST ══════════════╗")
     print(f"  Symbol     : {symbol}")
@@ -42,11 +38,6 @@ def _print_response(response: dict) -> None:
     print(f"  Symbol       : {response.get('symbol', 'N/A')}")
     print(f"  Client OID   : {response.get('clientOrderId', 'N/A')}")
     print("╚═══════════════════════════════════════════╝\n")
-
-
-# ---------------------------------------------------------------------------
-# CLI definition
-# ---------------------------------------------------------------------------
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -75,11 +66,6 @@ def build_parser() -> argparse.ArgumentParser:
         help="Limit price (required for LIMIT orders), e.g. 95000",
     )
     return parser
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
 
 def main() -> None:
     parser = build_parser()
@@ -125,7 +111,7 @@ def main() -> None:
         logger.error("API error: %s", exc)
         sys.exit(1)
 
-    except Exception as exc:  # network failures, timeouts, etc.
+    except Exception as exc:
         print(f"\n❌  Unexpected error: {exc}\n")
         logger.exception("Unexpected error: %s", exc)
         sys.exit(1)
