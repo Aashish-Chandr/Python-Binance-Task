@@ -33,9 +33,6 @@ class BinanceFuturesClient:
         self.session.headers.update({"X-MBX-APIKEY": self.api_key})
         logger.info("BinanceFuturesClient initialised (testnet: %s)", self.base_url)
 
-    # ------------------------------------------------------------------
-    # Internal helpers
-    # ------------------------------------------------------------------
 
     def _sign(self, params: dict) -> dict:
         """Append a HMAC-SHA256 signature to a parameter dict."""
@@ -71,9 +68,6 @@ class BinanceFuturesClient:
 
         return data
 
-    # ------------------------------------------------------------------
-    # Public API
-    # ------------------------------------------------------------------
 
     def place_order(
         self,
