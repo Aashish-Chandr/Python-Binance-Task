@@ -22,24 +22,21 @@ def validate_inputs(
     Raises:
         ValueError: on any invalid input.
     """
-    # --- symbol ---
+  
     if not symbol or not isinstance(symbol, str):
         raise ValueError("Symbol must be a non-empty string, e.g. BTCUSDT.")
     symbol = symbol.strip().upper()
 
-    # --- side ---
     side = side.strip().upper()
     if side not in VALID_SIDES:
         raise ValueError(f"Side must be one of {sorted(VALID_SIDES)}. Got: '{side}'.")
 
-    # --- order type ---
     order_type = order_type.strip().upper()
     if order_type not in VALID_ORDER_TYPES:
         raise ValueError(
             f"Order type must be one of {sorted(VALID_ORDER_TYPES)}. Got: '{order_type}'."
         )
 
-    # --- quantity ---
     try:
         qty = float(quantity)
         if qty <= 0:
@@ -47,7 +44,6 @@ def validate_inputs(
     except (ValueError, TypeError):
         raise ValueError("Quantity must be a positive number, e.g. 0.01.")
 
-    # --- price (required only for LIMIT) ---
     parsed_price: float | None = None
     if order_type == "LIMIT":
         if price is None:
