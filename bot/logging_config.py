@@ -8,7 +8,6 @@ def setup_logger(name: str) -> logging.Logger:
 
     logger = logging.getLogger(name)
 
-    # Avoid adding duplicate handlers if logger already exists
     if logger.handlers:
         return logger
 
